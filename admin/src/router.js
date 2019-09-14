@@ -20,7 +20,9 @@ export default new Router({
       component: Main,
       children: [
         {path: '/category/create', component: CategoryCreate},
-        {path: "/category/list",component: CategoryList}
+        {path: '/category/edit/:id', component: CategoryCreate, props: true},
+        {path: "/category/list",component: CategoryList},
+
       ]
     }
   ]

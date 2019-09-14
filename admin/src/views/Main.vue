@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100vh;">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router :default-openeds="['1', '3']">
+      <el-menu :default-active="$route.path" router :default-openeds="['1', '3']">
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-message"></i>内容管理
