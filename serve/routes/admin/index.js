@@ -17,9 +17,17 @@ module.exports = app => {
     res.send(model);
   })
 
+  //删除分类接口
+  router.post('/categories/delete', async (req, res) => {
+    await Category.findByIdAndDelete(req.body.id);
+    res.send({
+      code: 200,
+    });
+  })
+
   //获取分类列表接口
   router.get('/categories', async (req, res) => {
-    const items = await Category.find().limit(10); //限制返回数据条数
+    const items = await Category.find().populate("parent").limit(10); //限制返回数据条数
     res.send(items);
   })
 

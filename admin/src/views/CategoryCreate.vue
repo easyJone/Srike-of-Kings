@@ -2,6 +2,11 @@
   <div>
     <h1>{{id ? "编辑" : "新建"}}分类</h1>
     <el-form :model="model" ref="form" label-width="80px">
+      <el-form-item label="上级分类">
+        <el-select v-model="model.parent" placeholder="请选择上级分类">
+          <el-option v-for="item in parentObjs" :key="item._id" :label="item.name" :value="item._id"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
@@ -18,7 +23,8 @@ export default {
   props: ["id"],
   data() {
     return {
-      model: {}
+      model: {},
+      parentObjs: []
     };
   },
   methods: {
@@ -42,10 +48,16 @@ export default {
         params: { id: this.id }
       });
       this.model = res.data;
+    },
+    async fetchParents() {
+      //获取所有数据提取为上级分类的选择数据
+      const items = await this.$http.get("/categories");
+      this.parentObjs = items.data;
     }
   },
   created() {
     this.id && this.fetch();
+    this.fetchParents();
   }
 };
 </script>

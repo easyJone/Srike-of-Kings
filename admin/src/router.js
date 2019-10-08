@@ -20,7 +20,7 @@ export default new Router({
       component: Main,
       children: [
         {path: '/category/create', component: CategoryCreate},
-        {path: '/category/edit/:id', component: CategoryCreate, props: true},
+        {path: '/category/edit/:id', component: CategoryCreate, props: true},//这里props：true表示将动态参数注入到组件内。
         {path: "/category/list",component: CategoryList},
 
       ]
