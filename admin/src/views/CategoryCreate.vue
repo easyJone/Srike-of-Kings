@@ -31,10 +31,10 @@ export default {
     async onSubmit() {
       let res;
       if (this.id) {
-        res = await this.$http.post("/categories/edit", this.model);
+        res = await this.$http.post("/rest/categories/edit", this.model);
       } else {
         //发送请求
-        res = await this.$http.post("/categories", this.model);
+        res = await this.$http.post("/rest/categories/create", this.model);
       }
       this.$router.push("/category/list");
       this.$message({
@@ -44,14 +44,14 @@ export default {
     },
     async fetch() {
       //获取某一分类的数据详情
-      const res = await this.$http.get("/categories/getDetail", {
+      const res = await this.$http.get("/rest/categories/getDetail", {
         params: { id: this.id }
       });
       this.model = res.data;
     },
     async fetchParents() {
       //获取所有数据提取为上级分类的选择数据
-      const items = await this.$http.get("/categories");
+      const items = await this.$http.get("/rest/categories/list");
       this.parentObjs = items.data;
     }
   },

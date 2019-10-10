@@ -30,7 +30,7 @@ export default {
   methods: {
     //请求列表数据：
     async _queryData() {
-      const items = await this.$http.get("/categories");
+      const items = await this.$http.get("/rest/categories/list");
       this.tableData = items.data;
     },
     //删除数据：
@@ -40,7 +40,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-        const res = await this.$http.post("/categories/delete", {
+        const res = await this.$http.post("/rest/categories/delete", {
           id: row._id
         });
         if (res.data.code === 200) {
